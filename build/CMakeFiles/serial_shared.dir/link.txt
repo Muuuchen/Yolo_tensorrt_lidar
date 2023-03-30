@@ -1,0 +1,2 @@
+/usr/bin/ar qc libserial_shared.a  CMakeFiles/serial_shared.dir/SerialInterface.cpp.o
+/usr/bin/ranlib libserial_shared.a

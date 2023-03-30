@@ -1,0 +1,2 @@
+/usr/bin/ar qc libUDPSocket_shared.a  CMakeFiles/UDPSocket_shared.dir/UDPSocket.cpp.o
+/usr/bin/ranlib libUDPSocket_shared.a

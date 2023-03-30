@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/robocon/Desktop/Infer_color_lidar/UDPSocket.cpp
+UDPSocket.h
+/home/robocon/Desktop/Infer_color_lidar/UDPSocket.h
+
+/home/robocon/Desktop/Infer_color_lidar/UDPSocket.h
+sys/types.h
+-
+sys/socket.h
+-
+netinet/in.h
+-
+arpa/inet.h
+-
+unistd.h
+-
+netdb.h
+-
+string.h
+-
+iostream
+-
+

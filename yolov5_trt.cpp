@@ -345,8 +345,11 @@ int main(int argc, char **argv)
         for(auto tb : frameTrackingResult){
             float _bbox[4] = {tb.box.x, tb.box.y,tb.box.width,tb.box.height};
             cv::Rect r = get_rect(img, _bbox);
-            rectangle(img,r, cv::Scalar(255, 255, 0), 2);
-            std::string label = cv::format("%d",tmp_cnt) ;
+	    if(select_index == tmp_cnt)
+	   	 rectangle(img,r, cv::Scalar(255, 255, 0), 2);
+	    else
+		    rectangle(img,r,cv::Scalar(0,0,0),2);
+	    std::string label = cv::format("%d",tmp_cnt) ;
             cv::putText(img, label, cv::Point(r.x, r.y - 1), cv::FONT_HERSHEY_SIMPLEX, 0.8, cv::Scalar(255, 255, 0), 2);
             tmp_cnt++;
         }
@@ -357,7 +360,7 @@ int main(int argc, char **argv)
         }
         //std::cout<<"start touch!"<<std::endl;
         // cv::circle(img, cv::Point(send_point[0],send_point[1]), 3, cv::Scalar(255, 0, 0), -1);
-        cv::line(img,cv::Point(send_point[0], 1), cv::Point(send_point[0],639),cv::Scalar(255, 0, 0),1,8);
+        //cv::line(img,cv::Point(send_point[0], 1), cv::Point(send_point[0],639),cv::Scalar(255, 0, 0),1,8);
         float xnew = calAngle(color_intrin,send_point[0],send_point[1]);
         
         //cv::imshow("src", img);

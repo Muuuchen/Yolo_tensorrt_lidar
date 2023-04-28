@@ -60,15 +60,15 @@ include CMakeFiles/serial_shared.dir/flags.make
 CMakeFiles/serial_shared.dir/SerialInterface.cpp.o: CMakeFiles/serial_shared.dir/flags.make
 CMakeFiles/serial_shared.dir/SerialInterface.cpp.o: ../SerialInterface.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/robocon/Desktop/Infer_color_lidar/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/serial_shared.dir/SerialInterface.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/serial_shared.dir/SerialInterface.cpp.o -c /home/robocon/Desktop/Infer_color_lidar/SerialInterface.cpp
+	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/serial_shared.dir/SerialInterface.cpp.o -c /home/robocon/Desktop/Infer_color_lidar/SerialInterface.cpp
 
 CMakeFiles/serial_shared.dir/SerialInterface.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/serial_shared.dir/SerialInterface.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/robocon/Desktop/Infer_color_lidar/SerialInterface.cpp > CMakeFiles/serial_shared.dir/SerialInterface.cpp.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/robocon/Desktop/Infer_color_lidar/SerialInterface.cpp > CMakeFiles/serial_shared.dir/SerialInterface.cpp.i
 
 CMakeFiles/serial_shared.dir/SerialInterface.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/serial_shared.dir/SerialInterface.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/robocon/Desktop/Infer_color_lidar/SerialInterface.cpp -o CMakeFiles/serial_shared.dir/SerialInterface.cpp.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/robocon/Desktop/Infer_color_lidar/SerialInterface.cpp -o CMakeFiles/serial_shared.dir/SerialInterface.cpp.s
 
 # Object files for target serial_shared
 serial_shared_OBJECTS = \

@@ -60,67 +60,67 @@ include CMakeFiles/yolov5.dir/flags.make
 CMakeFiles/yolov5.dir/calibrator.cpp.o: CMakeFiles/yolov5.dir/flags.make
 CMakeFiles/yolov5.dir/calibrator.cpp.o: ../calibrator.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/robocon/Desktop/Infer_color_lidar/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/yolov5.dir/calibrator.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/yolov5.dir/calibrator.cpp.o -c /home/robocon/Desktop/Infer_color_lidar/calibrator.cpp
+	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/yolov5.dir/calibrator.cpp.o -c /home/robocon/Desktop/Infer_color_lidar/calibrator.cpp
 
 CMakeFiles/yolov5.dir/calibrator.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/yolov5.dir/calibrator.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/robocon/Desktop/Infer_color_lidar/calibrator.cpp > CMakeFiles/yolov5.dir/calibrator.cpp.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/robocon/Desktop/Infer_color_lidar/calibrator.cpp > CMakeFiles/yolov5.dir/calibrator.cpp.i
 
 CMakeFiles/yolov5.dir/calibrator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/yolov5.dir/calibrator.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/robocon/Desktop/Infer_color_lidar/calibrator.cpp -o CMakeFiles/yolov5.dir/calibrator.cpp.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/robocon/Desktop/Infer_color_lidar/calibrator.cpp -o CMakeFiles/yolov5.dir/calibrator.cpp.s
 
 CMakeFiles/yolov5.dir/yolov5_trt.cpp.o: CMakeFiles/yolov5.dir/flags.make
 CMakeFiles/yolov5.dir/yolov5_trt.cpp.o: ../yolov5_trt.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/robocon/Desktop/Infer_color_lidar/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/yolov5.dir/yolov5_trt.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/yolov5.dir/yolov5_trt.cpp.o -c /home/robocon/Desktop/Infer_color_lidar/yolov5_trt.cpp
+	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/yolov5.dir/yolov5_trt.cpp.o -c /home/robocon/Desktop/Infer_color_lidar/yolov5_trt.cpp
 
 CMakeFiles/yolov5.dir/yolov5_trt.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/yolov5.dir/yolov5_trt.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/robocon/Desktop/Infer_color_lidar/yolov5_trt.cpp > CMakeFiles/yolov5.dir/yolov5_trt.cpp.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/robocon/Desktop/Infer_color_lidar/yolov5_trt.cpp > CMakeFiles/yolov5.dir/yolov5_trt.cpp.i
 
 CMakeFiles/yolov5.dir/yolov5_trt.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/yolov5.dir/yolov5_trt.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/robocon/Desktop/Infer_color_lidar/yolov5_trt.cpp -o CMakeFiles/yolov5.dir/yolov5_trt.cpp.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/robocon/Desktop/Infer_color_lidar/yolov5_trt.cpp -o CMakeFiles/yolov5.dir/yolov5_trt.cpp.s
 
 CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/KalmanTracker.cpp.o: CMakeFiles/yolov5.dir/flags.make
 CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/KalmanTracker.cpp.o: ../sort-cpp-master/sort-c++/KalmanTracker.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/robocon/Desktop/Infer_color_lidar/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/KalmanTracker.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/KalmanTracker.cpp.o -c /home/robocon/Desktop/Infer_color_lidar/sort-cpp-master/sort-c++/KalmanTracker.cpp
+	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/KalmanTracker.cpp.o -c /home/robocon/Desktop/Infer_color_lidar/sort-cpp-master/sort-c++/KalmanTracker.cpp
 
 CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/KalmanTracker.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/KalmanTracker.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/robocon/Desktop/Infer_color_lidar/sort-cpp-master/sort-c++/KalmanTracker.cpp > CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/KalmanTracker.cpp.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/robocon/Desktop/Infer_color_lidar/sort-cpp-master/sort-c++/KalmanTracker.cpp > CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/KalmanTracker.cpp.i
 
 CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/KalmanTracker.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/KalmanTracker.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/robocon/Desktop/Infer_color_lidar/sort-cpp-master/sort-c++/KalmanTracker.cpp -o CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/KalmanTracker.cpp.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/robocon/Desktop/Infer_color_lidar/sort-cpp-master/sort-c++/KalmanTracker.cpp -o CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/KalmanTracker.cpp.s
 
 CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/Hungarian.cpp.o: CMakeFiles/yolov5.dir/flags.make
 CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/Hungarian.cpp.o: ../sort-cpp-master/sort-c++/Hungarian.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/robocon/Desktop/Infer_color_lidar/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/Hungarian.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/Hungarian.cpp.o -c /home/robocon/Desktop/Infer_color_lidar/sort-cpp-master/sort-c++/Hungarian.cpp
+	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/Hungarian.cpp.o -c /home/robocon/Desktop/Infer_color_lidar/sort-cpp-master/sort-c++/Hungarian.cpp
 
 CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/Hungarian.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/Hungarian.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/robocon/Desktop/Infer_color_lidar/sort-cpp-master/sort-c++/Hungarian.cpp > CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/Hungarian.cpp.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/robocon/Desktop/Infer_color_lidar/sort-cpp-master/sort-c++/Hungarian.cpp > CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/Hungarian.cpp.i
 
 CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/Hungarian.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/Hungarian.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/robocon/Desktop/Infer_color_lidar/sort-cpp-master/sort-c++/Hungarian.cpp -o CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/Hungarian.cpp.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/robocon/Desktop/Infer_color_lidar/sort-cpp-master/sort-c++/Hungarian.cpp -o CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/Hungarian.cpp.s
 
 CMakeFiles/yolov5.dir/_track.cpp.o: CMakeFiles/yolov5.dir/flags.make
 CMakeFiles/yolov5.dir/_track.cpp.o: ../_track.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/robocon/Desktop/Infer_color_lidar/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/yolov5.dir/_track.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/yolov5.dir/_track.cpp.o -c /home/robocon/Desktop/Infer_color_lidar/_track.cpp
+	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/yolov5.dir/_track.cpp.o -c /home/robocon/Desktop/Infer_color_lidar/_track.cpp
 
 CMakeFiles/yolov5.dir/_track.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/yolov5.dir/_track.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/robocon/Desktop/Infer_color_lidar/_track.cpp > CMakeFiles/yolov5.dir/_track.cpp.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/robocon/Desktop/Infer_color_lidar/_track.cpp > CMakeFiles/yolov5.dir/_track.cpp.i
 
 CMakeFiles/yolov5.dir/_track.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/yolov5.dir/_track.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/robocon/Desktop/Infer_color_lidar/_track.cpp -o CMakeFiles/yolov5.dir/_track.cpp.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/robocon/Desktop/Infer_color_lidar/_track.cpp -o CMakeFiles/yolov5.dir/_track.cpp.s
 
 # Object files for target yolov5
 yolov5_OBJECTS = \

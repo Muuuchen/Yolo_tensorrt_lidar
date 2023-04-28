@@ -60,15 +60,15 @@ include CMakeFiles/UDPSocket_shared.dir/flags.make
 CMakeFiles/UDPSocket_shared.dir/UDPSocket.cpp.o: CMakeFiles/UDPSocket_shared.dir/flags.make
 CMakeFiles/UDPSocket_shared.dir/UDPSocket.cpp.o: ../UDPSocket.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/robocon/Desktop/Infer_color_lidar/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/UDPSocket_shared.dir/UDPSocket.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/UDPSocket_shared.dir/UDPSocket.cpp.o -c /home/robocon/Desktop/Infer_color_lidar/UDPSocket.cpp
+	/usr/bin/aarch64-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/UDPSocket_shared.dir/UDPSocket.cpp.o -c /home/robocon/Desktop/Infer_color_lidar/UDPSocket.cpp
 
 CMakeFiles/UDPSocket_shared.dir/UDPSocket.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/UDPSocket_shared.dir/UDPSocket.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/robocon/Desktop/Infer_color_lidar/UDPSocket.cpp > CMakeFiles/UDPSocket_shared.dir/UDPSocket.cpp.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/robocon/Desktop/Infer_color_lidar/UDPSocket.cpp > CMakeFiles/UDPSocket_shared.dir/UDPSocket.cpp.i
 
 CMakeFiles/UDPSocket_shared.dir/UDPSocket.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/UDPSocket_shared.dir/UDPSocket.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/robocon/Desktop/Infer_color_lidar/UDPSocket.cpp -o CMakeFiles/UDPSocket_shared.dir/UDPSocket.cpp.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/robocon/Desktop/Infer_color_lidar/UDPSocket.cpp -o CMakeFiles/UDPSocket_shared.dir/UDPSocket.cpp.s
 
 # Object files for target UDPSocket_shared
 UDPSocket_shared_OBJECTS = \

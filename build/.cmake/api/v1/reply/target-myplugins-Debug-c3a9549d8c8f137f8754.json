@@ -1,0 +1,130 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "libmyplugins.so"
+		}
+	],
+	"backtrace" : 2,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"cuda_add_library",
+			"link_directories"
+		],
+		"files" : 
+		[
+			"/usr/local/share/cmake-3.16/Modules/FindCUDA.cmake",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 28,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 1825,
+				"parent" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 21,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 24,
+				"parent" : 0
+			}
+		]
+	},
+	"id" : "myplugins::@6890427a1f51a3e7e1df",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "-L/usr/local/cuda/lib64",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "-L/usr/lib/x86_64-linux-gnu",
+				"role" : "libraryPath"
+			},
+			{
+				"fragment" : "-Wl,-rpath,/usr/local/cuda/lib64:/usr/lib/x86_64-linux-gnu:/usr/local/cuda-10.2/lib64",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/cuda-10.2/lib64/libcudart.so",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lnvinfer",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lcudart",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "myplugins",
+	"nameOnDisk" : "libmyplugins.so",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Object Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				1
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 2,
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/myplugins.dir/myplugins_generated_yololayer.cu.o",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "yololayer.cu",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}

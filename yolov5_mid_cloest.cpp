@@ -280,7 +280,7 @@ int main(int argc, char **argv)
             std::vector<uchar> buf(pixel_number);
             cv::imencode(".jpg", img, buf);
             int length = buf.size();
-            std::string str = "buffer_start";
+            std::string str = "11111111";
             s->send(reinterpret_cast<const unsigned char*>(str.c_str()), str.length());
             /* Transmit chunks of 1024 bytes */
             int chunkSize = 1024;
@@ -289,7 +289,7 @@ int main(int argc, char **argv)
                 s->send(tempVec.data(), chunkSize);
             }
             /* End image transmission */
-            str = "buffer_end";
+            str = "22222222";
             s->send(reinterpret_cast<const unsigned char*>(str.c_str()), str.length());
             //printf("Sending image  to %s:%d with length %d bytes \n", ip, port, length);
         }

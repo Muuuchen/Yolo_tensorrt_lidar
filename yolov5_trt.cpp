@@ -42,6 +42,7 @@ static Logger gLogger;
 
 char *my_classes[] = {"cylinder"};
 
+
 // stuff we know about the network and the input/output blobs
 static const int INPUT_H = Yolo::INPUT_H;
 static const int INPUT_W = Yolo::INPUT_W;
@@ -57,14 +58,14 @@ int out_flag = 0;
 int send_index = 0;
 int select_index=0;
 unsigned char buff_lidar[512];
-unsigned char buff_upper[512];
+unsigned char buff_upper[1];
 serialPort myserial_lidar;
 serialPort myserial_upper;
 int nread_upper,nwrite_upper;
 int i,nread,nwrite;
 pthread_mutex_t mutex_upper;
 pthread_mutex_t mutex_lidar;
-
+UDPSocket *s;
 
 
 static int get_width(int x, float gw, int divisor = 8)
@@ -97,19 +98,22 @@ void* readLidar(void* args)
         // printf("\n");
     }
 }
+//
 void* readUpper(void* args)
 {
         while(1)
         {
-            // pthread_mutex_lock(&mutex_upper);
+            pthread_mutex_lock(&mutex_upper);
             myserial_upper.readBuffer(buff_upper,1);
             int temp = (char)buff_upper[0] - '0';
             if(temp <0) continue;
             select_index = temp;
-            printf("select_index  :  %d\n", select_index);   
+            std::cerr<<"接受字符串信号成功"<<std::endl;
+            std::cerr<<"select_index: "<<select_index<<std::endl;
             out_flag = 1;
-            // pthread_mutex_unlock(&mutex_upper);
-            memset(buff_upper, 0, sizeof(buff_upper));
+            memset(buff_upper, 0, sizeof(buff_upper));  
+            pthread_mutex_unlock(&mutex_upper);
+
         }
 }
 double calAngle(rs2_intrinsics intrinsics , int x,int y)
@@ -137,26 +141,33 @@ double calAngle(rs2_intrinsics intrinsics , int x,int y)
         std::cout<< "x_pixel:"<<pnt.x<<std::endl;
         std::cout<< "y_pixel:"<<pnt.y<<std::endl;
         out_flag = 0;
-        std::string label = "#"
-                            +std::to_string(atan(rxNew)/CV_PI*180)
-                            +'!';
-        std::cout<<label<<std::endl;
-        unsigned char send_lidar[6];
-        for (int i = 4; i < 10; i++)
+        float angle = atan(rxNew);
+        
+        unsigned char send_buff[13];
+        send_buff[0] = '$';
+        send_buff[1] = (unsigned char)buff_lidar[5];
+        send_buff[2] = (unsigned char)buff_lidar[7];
+        send_buff[3] = (unsigned char)buff_lidar[8];
+        send_buff[4] = (unsigned char)buff_lidar[9];
+        send_buff[5] = '#';
+        send_buff[6] =  (angle - 0.0 > 0.0) ? '+':'-';
+        if(angle < 0) angle = -angle;
+	    int k = 0;
+        while(k < 4)
         {
-            printf("%c  ", (char)buff_lidar[i]);
-            send_lidar[i-4] = (unsigned char)buff_lidar[i];
+            send_buff[k+7] = (int)angle + '0';
+            angle -= (int)angle;
+            angle *= 10;
+            k++;
         }
-
+        send_buff[11] = '!';
+	send_buff[12] = 0;
+    std::cerr<<"发送的字符串为："<<(char*)send_buff<<std::endl;
         printf("\n");
         if(on_off_serial)
         {
-            strcpy((char*)buff_upper, label.c_str());
-            int len_lidar = strlen((char*)send_lidar);
-            myserial_upper.writeBuffer(send_lidar, len_lidar);
-            int len_upper= strlen((char*)buff_upper);
-            myserial_upper.writeBuffer(buff_upper, len_upper);
-            memset(buff_upper, 0, sizeof(buff_upper));
+            myserial_upper.writeBuffer(send_buff, 12);
+            memset(send_buff, 0, sizeof(send_buff));
 
         }
     }
@@ -241,7 +252,7 @@ int main(int argc, char **argv)
     myserial_upper.setup(baudrate_upper,0,8,1,'N'); 
     myserial_lidar.writeBuffer(test, 4);
     myserial_upper.writeBuffer(hello_upper,5);
-    UDPSocket *s = new UDPSocket(ip, port, TRUE, TRUE);
+    s = new UDPSocket(ip, port, TRUE, TRUE);
     if(on_off_socket)
         printf("Socket successful!");
     //cv::namedWindow("src");//创建窗口
@@ -371,7 +382,7 @@ int main(int argc, char **argv)
             std::vector<uchar> buf(pixel_number);
             cv::imencode(".jpg", img, buf);
             int length = buf.size();
-            std::string str = "buffer_start";
+            std::string str = "11111111";
             s->send(reinterpret_cast<const unsigned char*>(str.c_str()), str.length());
             /* Transmit chunks of 1024 bytes */
             int chunkSize = 1024;
@@ -380,7 +391,7 @@ int main(int argc, char **argv)
                 s->send(tempVec.data(), chunkSize);
             }
             /* End image transmission */
-            str = "buffer_end";
+            str = "22222222";
             s->send(reinterpret_cast<const unsigned char*>(str.c_str()), str.length());
             //printf("Sending image  to %s:%d with length %d bytes \n", ip, port, length);
         }

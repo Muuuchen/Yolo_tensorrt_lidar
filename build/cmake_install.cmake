@@ -1,4 +1,4 @@
-# Install script for directory: /home/robocon/Desktop/Infer_color_lidar
+# Install script for directory: /home/robocon/Desktop/Yolo_tensorrt_lidar
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/robocon/Desktop/Infer_color_lidar/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/robocon/Desktop/Yolo_tensorrt_lidar/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/robocon/Desktop/Infer_color_lidar/SerialInterface.cpp" "/home/robocon/Desktop/Infer_color_lidar/build/CMakeFiles/serial_shared.dir/SerialInterface.cpp.o"
+  "/home/robocon/Desktop/Yolo_tensorrt_lidar/SerialInterface.cpp" "/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles/serial_shared.dir/SerialInterface.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -19,7 +19,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/local/cuda/include"
   "/usr/include/x86_64-linux-gnu"
   "/usr/local/cuda-10.2/include"
-  "/usr/local/include/opencv"
+  "/usr/local/include/opencv4"
   "../.."
   )
 

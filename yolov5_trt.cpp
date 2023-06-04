@@ -18,7 +18,7 @@
 #include"UDPSocket.h"
 #include"config.h"
 
-#include "_track.h"
+#include"_track.h"
 
 
 #define USE_FP16 // set USE_INT8 or USE_FP16 or USE_FP32
@@ -35,6 +35,8 @@
 #define CV_EVENT_LBUTTONDBLCLK 7         //左键双击
 #define CV_EVENT_RBUTTONDBLCLK 8         //右键双击
 #define CV_EVENT_MBUTTONDBLCLK 9         //中键双击
+
+#define KEYDOWN(vk) (0x8000 & ::GetAsy)
 
 
 clock_t t_start, t_end;
@@ -66,6 +68,7 @@ int i,nread,nwrite;
 pthread_mutex_t mutex_upper;
 pthread_mutex_t mutex_lidar;
 UDPSocket *s;
+
 
 
 static int get_width(int x, float gw, int divisor = 8)
@@ -143,30 +146,31 @@ double calAngle(rs2_intrinsics intrinsics , int x,int y)
         out_flag = 0;
         float angle = atan(rxNew);
         
-        unsigned char send_buff[13];
-        send_buff[0] = '$';
-        send_buff[1] = (unsigned char)buff_lidar[5];
-        send_buff[2] = (unsigned char)buff_lidar[7];
-        send_buff[3] = (unsigned char)buff_lidar[8];
-        send_buff[4] = (unsigned char)buff_lidar[9];
-        send_buff[5] = '#';
-        send_buff[6] =  (angle - 0.0 > 0.0) ? '+':'-';
+        unsigned char send_buff[14];
+        send_buff[0] = '9';
+	send_buff[1] = '$';
+        send_buff[2] = (unsigned char)buff_lidar[5];
+        send_buff[3] = (unsigned char)buff_lidar[7];
+        send_buff[4] = (unsigned char)buff_lidar[8];
+        send_buff[5] = (unsigned char)buff_lidar[9];
+        send_buff[6] = '#';
+        send_buff[7] =  (angle - 0.0 > 0.0) ? '+':'-';
         if(angle < 0) angle = -angle;
 	    int k = 0;
         while(k < 4)
         {
-            send_buff[k+7] = (int)angle + '0';
+            send_buff[k+8] = (int)angle + '0';
             angle -= (int)angle;
             angle *= 10;
             k++;
         }
-        send_buff[11] = '!';
-	send_buff[12] = 0;
+        send_buff[12] = '!';
+	send_buff[13] = 0;
     std::cerr<<"发送的字符串为："<<(char*)send_buff<<std::endl;
         printf("\n");
         if(on_off_serial)
         {
-            myserial_upper.writeBuffer(send_buff, 12);
+            myserial_upper.writeBuffer(send_buff, 13);
             memset(send_buff, 0, sizeof(send_buff));
 
         }
@@ -188,6 +192,23 @@ bool tracking_cmp(TrackingBox a, TrackingBox b){
 
 int main(int argc, char **argv)
 {
+
+    VideoWriter outputVideo;
+
+    //input para define
+    if(savedFlag)
+    {
+        int fps = 30;
+        outputVideo.open(outputVideopath, cv::VideoWriter::fourcc('X','V','I','D'),fps,cv::Size(640,480),true);   
+        if(!outputVideo.isOpened())
+        {
+            cout<< "failed to oppen!" <<endl;
+            return -1; 
+        }
+    }
+
+
+
     cudaSetDevice(DEVICE);
 
     std::string engine_name = "../weights/best.engine";
@@ -395,9 +416,14 @@ int main(int argc, char **argv)
             s->send(reinterpret_cast<const unsigned char*>(str.c_str()), str.length());
             //printf("Sending image  to %s:%d with length %d bytes \n", ip, port, length);
         }
+        if(savedFlag)
+        {
+            outputVideo<< img;
+        }
+
         //cv::imshow("depth", img_depth);
         key = cv::waitKey(1);
-        if (key == 'q')
+        if( key == 'q')
         {
             break;
         }

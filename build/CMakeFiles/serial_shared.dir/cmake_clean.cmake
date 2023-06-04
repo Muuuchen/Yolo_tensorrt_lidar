@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/serial_shared.dir/SerialInterface.cpp.o"
-  "libserial_shared.a"
   "libserial_shared.pdb"
+  "libserial_shared.a"
 )
 
 # Per-language clean rules from dependency scanning.

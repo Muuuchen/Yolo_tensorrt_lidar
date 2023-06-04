@@ -57,19 +57,19 @@ if(NOT generated_file)
 endif()
 
 # Set these up as variables to make reading the generated file easier
-set(CMAKE_COMMAND "/usr/local/bin/cmake") # path
-set(source_file "/home/robocon/Desktop/Infer_color_lidar/yololayer.cu") # path
-set(NVCC_generated_dependency_file "/home/robocon/Desktop/Infer_color_lidar/build/CMakeFiles/myplugins.dir//myplugins_generated_yololayer.cu.o.NVCC-depend") # path
-set(cmake_dependency_file "/home/robocon/Desktop/Infer_color_lidar/build/CMakeFiles/myplugins.dir//myplugins_generated_yololayer.cu.o.depend") # path
-set(CUDA_make2cmake "/usr/local/share/cmake-3.16/Modules/FindCUDA/make2cmake.cmake") # path
-set(CUDA_parse_cubin "/usr/local/share/cmake-3.16/Modules/FindCUDA/parse_cubin.cmake") # path
+set(CMAKE_COMMAND "/usr/bin/cmake") # path
+set(source_file "/home/robocon/Desktop/Yolo_tensorrt_lidar/yololayer.cu") # path
+set(NVCC_generated_dependency_file "/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles/myplugins.dir//myplugins_generated_yololayer.cu.o.NVCC-depend") # path
+set(cmake_dependency_file "/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles/myplugins.dir//myplugins_generated_yololayer.cu.o.depend") # path
+set(CUDA_make2cmake "/usr/share/cmake-3.10/Modules/FindCUDA/make2cmake.cmake") # path
+set(CUDA_parse_cubin "/usr/share/cmake-3.10/Modules/FindCUDA/parse_cubin.cmake") # path
 set(build_cubin OFF) # bool
-set(CUDA_HOST_COMPILER "/usr/bin/aarch64-linux-gnu-gcc") # path
+set(CUDA_HOST_COMPILER "/usr/bin/cc") # path
 # We won't actually use these variables for now, but we need to set this, in
 # order to force this file to be run again if it changes.
-set(generated_file_path "/home/robocon/Desktop/Infer_color_lidar/build/CMakeFiles/myplugins.dir//.") # path
-set(generated_file_internal "/home/robocon/Desktop/Infer_color_lidar/build/CMakeFiles/myplugins.dir//./myplugins_generated_yololayer.cu.o") # path
-set(generated_cubin_file_internal "/home/robocon/Desktop/Infer_color_lidar/build/CMakeFiles/myplugins.dir//./myplugins_generated_yololayer.cu.o.cubin.txt") # path
+set(generated_file_path "/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles/myplugins.dir//.") # path
+set(generated_file_internal "/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles/myplugins.dir//./myplugins_generated_yololayer.cu.o") # path
+set(generated_cubin_file_internal "/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles/myplugins.dir//./myplugins_generated_yololayer.cu.o.cubin.txt") # path
 
 set(CUDA_NVCC_EXECUTABLE "/usr/local/cuda-10.2/bin/nvcc") # path
 set(CUDA_NVCC_FLAGS  ;; ) # list
@@ -79,8 +79,7 @@ set(CUDA_NVCC_FLAGS_MINSIZEREL  ; )
 set(CUDA_NVCC_FLAGS_RELEASE  ; )
 set(CUDA_NVCC_FLAGS_RELWITHDEBINFO  ; )
 set(nvcc_flags -m64;--std;c++11;-Dmyplugins_EXPORTS) # list
-set(CUDA_NVCC_INCLUDE_DIRS [==[/usr/local/cuda-10.2/include;/home/robocon/Desktop/Infer_color_lidar/include;/usr/local/cuda/include;/usr/include/x86_64-linux-gnu;/usr/local/cuda-10.2/include;/usr/local/include;/usr/local/include/opencv;/home/robocon/Desktop/Infer_color_lidar/..]==]) # list (needs to be in lua quotes to address backslashes)
-string(REPLACE "\\" "/" CUDA_NVCC_INCLUDE_DIRS "${CUDA_NVCC_INCLUDE_DIRS}")
+set(CUDA_NVCC_INCLUDE_DIRS "/usr/local/cuda-10.2/include;/home/robocon/Desktop/Yolo_tensorrt_lidar/include;/usr/local/cuda/include;/usr/include/x86_64-linux-gnu;/usr/local/cuda-10.2/include;/usr/local/include/opencv4;/home/robocon/Desktop/Yolo_tensorrt_lidar/..") # list (needs to be in quotes to handle spaces properly).
 set(CUDA_NVCC_COMPILE_DEFINITIONS [==[API_EXPORTS]==]) # list (needs to be in lua quotes see #16510 ).
 set(format_flag "-c") # string
 set(cuda_language_flag ) # list
@@ -134,7 +133,7 @@ list(APPEND CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS_${build_configuration}})
 list( FIND CUDA_NVCC_FLAGS "-ccbin" ccbin_found0 )
 list( FIND CUDA_NVCC_FLAGS "--compiler-bindir" ccbin_found1 )
 if( ccbin_found0 LESS 0 AND ccbin_found1 LESS 0 AND CUDA_HOST_COMPILER )
-  if (CUDA_HOST_COMPILER STREQUAL "" AND DEFINED CCBIN)
+  if (CUDA_HOST_COMPILER STREQUAL "$(VCInstallDir)bin" AND DEFINED CCBIN)
     set(CCBIN -ccbin "${CCBIN}")
   else()
     set(CCBIN -ccbin "${CUDA_HOST_COMPILER}")
@@ -190,13 +189,13 @@ cuda_execute_process(
 set(depends_CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS}")
 set(CUDA_VERSION 10.2)
 if(CUDA_VERSION VERSION_LESS "3.0")
-  # Note that this will remove all occurrences of -G.
+  # Note that this will remove all occurances of -G.
   list(REMOVE_ITEM depends_CUDA_NVCC_FLAGS "-G")
 endif()
 
 # nvcc doesn't define __CUDACC__ for some reason when generating dependency files.  This
 # can cause incorrect dependencies when #including files based on this macro which is
-# defined in the generating passes of nvcc invocation.  We will go ahead and manually
+# defined in the generating passes of nvcc invokation.  We will go ahead and manually
 # define this for now until a future version fixes this bug.
 set(CUDACC_DEFINE -D__CUDACC__)
 

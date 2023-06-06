@@ -269,6 +269,7 @@ CMakeFiles/yolov5.dir/sort-cpp-master/sort-c++/KalmanTracker.cpp.o: /usr/local/i
 CMakeFiles/yolov5.dir/yolov5_trt.cpp.o: .././sort-cpp-master/sort-c++/Hungarian.h
 CMakeFiles/yolov5.dir/yolov5_trt.cpp.o: .././sort-cpp-master/sort-c++/KalmanTracker.h
 CMakeFiles/yolov5.dir/yolov5_trt.cpp.o: ../SerialInterface.h
+CMakeFiles/yolov5.dir/yolov5_trt.cpp.o: ../TCPSocket.h
 CMakeFiles/yolov5.dir/yolov5_trt.cpp.o: ../UDPSocket.h
 CMakeFiles/yolov5.dir/yolov5_trt.cpp.o: ../_track.h
 CMakeFiles/yolov5.dir/yolov5_trt.cpp.o: ../calibrator.h

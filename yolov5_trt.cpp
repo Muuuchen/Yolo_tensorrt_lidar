@@ -17,7 +17,7 @@
 #include<arpa/inet.h>
 #include"UDPSocket.h"
 #include"config.h"
-
+#include"TCPSocket.h"
 #include"_track.h"
 
 
@@ -68,7 +68,8 @@ int i,nread,nwrite;
 pthread_mutex_t mutex_upper;
 pthread_mutex_t mutex_lidar;
 UDPSocket *s;
-
+TCPSocket *tcpSocket;
+int tcpAlive = 0;
 
 
 static int get_width(int x, float gw, int divisor = 8)
@@ -106,17 +107,29 @@ void* readUpper(void* args)
 {
         while(1)
         {
-            pthread_mutex_lock(&mutex_upper);
-            myserial_upper.readBuffer(buff_upper,1);
-            int temp = (char)buff_upper[0] - '0';
-            if(temp <0) continue;
-            select_index = temp;
-            std::cerr<<"接受字符串信号成功"<<std::endl;
-            std::cerr<<"select_index: "<<select_index<<std::endl;
+            // pthread_mutex_lock(&mutex_upper);
+            // myserial_upper.readBuffer(buff_upper,1);
+            // int temp = (char)buff_upper[0] - '0';
+            // if(temp <0) continue;
+            
+            // select_index = temp;
+            // std::cerr<<"接受字符串信号成功"<<std::endl;
+            // std::cerr<<"select_index: "<<select_index<<std::endl;
+            // out_flag = 1;
+            // memset(buff_upper, 0, sizeof(buff_upper));  
+            // pthread_mutex_unlock(&mutex_upper);
+            std::string s = tcpSocket->tcpReceive();
+            if(s == "e")
+            {
+                std::cerr<<"client exit unexception"<<std::endl;
+                tcpAlive = 0;
+                pthread_exit(NULL);
+                break;
+            }
+            int sint = std::stoi(s);
+            select_index = sint;
             out_flag = 1;
-            memset(buff_upper, 0, sizeof(buff_upper));  
-            pthread_mutex_unlock(&mutex_upper);
-
+            std::cout<<"read char: "<<s<<std::endl;
         }
 }
 double calAngle(rs2_intrinsics intrinsics , int x,int y)
@@ -148,7 +161,7 @@ double calAngle(rs2_intrinsics intrinsics , int x,int y)
         
         unsigned char send_buff[14];
         send_buff[0] = '9';
-	send_buff[1] = '$';
+	    send_buff[1] = '$';
         send_buff[2] = (unsigned char)buff_lidar[5];
         send_buff[3] = (unsigned char)buff_lidar[7];
         send_buff[4] = (unsigned char)buff_lidar[8];
@@ -165,14 +178,13 @@ double calAngle(rs2_intrinsics intrinsics , int x,int y)
             k++;
         }
         send_buff[12] = '!';
-	send_buff[13] = 0;
-    std::cerr<<"发送的字符串为："<<(char*)send_buff<<std::endl;
+	    send_buff[13] = 0;
+        std::cerr<<"发送的字符串为："<<(char*)send_buff<<std::endl;
         printf("\n");
         if(on_off_serial)
         {
             myserial_upper.writeBuffer(send_buff, 13);
             memset(send_buff, 0, sizeof(send_buff));
-
         }
     }
 }
@@ -189,6 +201,7 @@ void doInference(IExecutionContext &context, cudaStream_t &stream, void **buffer
 bool tracking_cmp(TrackingBox a, TrackingBox b){
     return a.id<b.id;
 }
+
 
 int main(int argc, char **argv)
 {
@@ -208,7 +221,12 @@ int main(int argc, char **argv)
     }
 
 
+    tcpSocket = new TCPSocket(9876);
+    tcpAlive = 1;
 
+
+
+    ///
     cudaSetDevice(DEVICE);
 
     std::string engine_name = "../weights/best.engine";
@@ -273,9 +291,9 @@ int main(int argc, char **argv)
     myserial_upper.setup(baudrate_upper,0,8,1,'N'); 
     myserial_lidar.writeBuffer(test, 4);
     myserial_upper.writeBuffer(hello_upper,5);
+    std::cout<<"ready to setup udp"<<std::endl;
     s = new UDPSocket(ip, port, TRUE, TRUE);
-    if(on_off_socket)
-        printf("Socket successful!");
+    printf("Socket successful!");
     //cv::namedWindow("src");//创建窗口
 
     pthread_t thread_lidar_tid;
@@ -292,6 +310,14 @@ int main(int argc, char **argv)
     Init_Tracker();
     while (1)
     {
+        //恢复工作
+        if(tcpAlive == 0)
+        {       
+            delete tcpSocket;
+            tcpSocket = new TCPSocket(9876);
+            pthread_create(&thread_upper_tid,NULL, readUpper,NULL);
+            tcpAlive = 1;
+        }
         rs2::frameset pipe_frame = pipe.wait_for_frames();
         //rs2::depth_frame depth = pipe_frame.get_depth_frame(); /// 获取深度图像数据
         rs2::frame color = pipe_frame.get_color_frame();       /// 获取彩色图像数据
@@ -421,7 +447,7 @@ int main(int argc, char **argv)
             outputVideo<< img;
         }
 
-        //cv::imshow("depth", img_depth);
+        // cv::imshow("img", img);
         key = cv::waitKey(1);
         if( key == 'q')
         {

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libTCPSocket_shared.a  CMakeFiles/TCPSocket_shared.dir/TCPSocket.cpp.o
+/usr/bin/ranlib libTCPSocket_shared.a

@@ -59,8 +59,9 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/yolov5.dir/DependInfo.cmake"
-  "CMakeFiles/UDPSocket_shared.dir/DependInfo.cmake"
-  "CMakeFiles/myplugins.dir/DependInfo.cmake"
   "CMakeFiles/serial_shared.dir/DependInfo.cmake"
+  "CMakeFiles/myplugins.dir/DependInfo.cmake"
+  "CMakeFiles/UDPSocket_shared.dir/DependInfo.cmake"
+  "CMakeFiles/yolov5.dir/DependInfo.cmake"
+  "CMakeFiles/TCPSocket_shared.dir/DependInfo.cmake"
   )

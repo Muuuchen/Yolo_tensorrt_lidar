@@ -196,6 +196,7 @@ yolov5: CMakeFiles/yolov5.dir/_track.cpp.o
 yolov5: CMakeFiles/yolov5.dir/build.make
 yolov5: libserial_shared.a
 yolov5: libUDPSocket_shared.a
+yolov5: libTCPSocket_shared.a
 yolov5: libmyplugins.so
 yolov5: /usr/local/lib/libopencv_gapi.so.4.4.0
 yolov5: /usr/local/lib/libopencv_stitching.so.4.4.0

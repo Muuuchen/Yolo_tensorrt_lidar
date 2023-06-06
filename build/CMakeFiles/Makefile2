@@ -60,78 +60,39 @@ CMAKE_SOURCE_DIR = /home/robocon/Desktop/Yolo_tensorrt_lidar
 CMAKE_BINARY_DIR = /home/robocon/Desktop/Yolo_tensorrt_lidar/build
 
 #=============================================================================
-# Target rules for target CMakeFiles/yolov5.dir
+# Target rules for target CMakeFiles/serial_shared.dir
 
 # All Build rule for target.
-CMakeFiles/yolov5.dir/all: CMakeFiles/UDPSocket_shared.dir/all
-CMakeFiles/yolov5.dir/all: CMakeFiles/myplugins.dir/all
-CMakeFiles/yolov5.dir/all: CMakeFiles/serial_shared.dir/all
-	$(MAKE) -f CMakeFiles/yolov5.dir/build.make CMakeFiles/yolov5.dir/depend
-	$(MAKE) -f CMakeFiles/yolov5.dir/build.make CMakeFiles/yolov5.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles --progress-num=7,8,9,10,11,12 "Built target yolov5"
-.PHONY : CMakeFiles/yolov5.dir/all
+CMakeFiles/serial_shared.dir/all:
+	$(MAKE) -f CMakeFiles/serial_shared.dir/build.make CMakeFiles/serial_shared.dir/depend
+	$(MAKE) -f CMakeFiles/serial_shared.dir/build.make CMakeFiles/serial_shared.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles --progress-num=7,8 "Built target serial_shared"
+.PHONY : CMakeFiles/serial_shared.dir/all
 
 # Include target in all.
-all: CMakeFiles/yolov5.dir/all
+all: CMakeFiles/serial_shared.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/yolov5.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles 12
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/yolov5.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles 0
-.PHONY : CMakeFiles/yolov5.dir/rule
-
-# Convenience name for target.
-yolov5: CMakeFiles/yolov5.dir/rule
-
-.PHONY : yolov5
-
-# clean rule for target.
-CMakeFiles/yolov5.dir/clean:
-	$(MAKE) -f CMakeFiles/yolov5.dir/build.make CMakeFiles/yolov5.dir/clean
-.PHONY : CMakeFiles/yolov5.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/yolov5.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/UDPSocket_shared.dir
-
-# All Build rule for target.
-CMakeFiles/UDPSocket_shared.dir/all:
-	$(MAKE) -f CMakeFiles/UDPSocket_shared.dir/build.make CMakeFiles/UDPSocket_shared.dir/depend
-	$(MAKE) -f CMakeFiles/UDPSocket_shared.dir/build.make CMakeFiles/UDPSocket_shared.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles --progress-num=1,2 "Built target UDPSocket_shared"
-.PHONY : CMakeFiles/UDPSocket_shared.dir/all
-
-# Include target in all.
-all: CMakeFiles/UDPSocket_shared.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/UDPSocket_shared.dir/rule: cmake_check_build_system
+CMakeFiles/serial_shared.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/UDPSocket_shared.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/serial_shared.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles 0
-.PHONY : CMakeFiles/UDPSocket_shared.dir/rule
+.PHONY : CMakeFiles/serial_shared.dir/rule
 
 # Convenience name for target.
-UDPSocket_shared: CMakeFiles/UDPSocket_shared.dir/rule
+serial_shared: CMakeFiles/serial_shared.dir/rule
 
-.PHONY : UDPSocket_shared
-
-# clean rule for target.
-CMakeFiles/UDPSocket_shared.dir/clean:
-	$(MAKE) -f CMakeFiles/UDPSocket_shared.dir/build.make CMakeFiles/UDPSocket_shared.dir/clean
-.PHONY : CMakeFiles/UDPSocket_shared.dir/clean
+.PHONY : serial_shared
 
 # clean rule for target.
-clean: CMakeFiles/UDPSocket_shared.dir/clean
+CMakeFiles/serial_shared.dir/clean:
+	$(MAKE) -f CMakeFiles/serial_shared.dir/build.make CMakeFiles/serial_shared.dir/clean
+.PHONY : CMakeFiles/serial_shared.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/serial_shared.dir/clean
 
 .PHONY : clean
 
@@ -142,7 +103,7 @@ clean: CMakeFiles/UDPSocket_shared.dir/clean
 CMakeFiles/myplugins.dir/all:
 	$(MAKE) -f CMakeFiles/myplugins.dir/build.make CMakeFiles/myplugins.dir/depend
 	$(MAKE) -f CMakeFiles/myplugins.dir/build.make CMakeFiles/myplugins.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles --progress-num=3,4 "Built target myplugins"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles --progress-num=5,6 "Built target myplugins"
 .PHONY : CMakeFiles/myplugins.dir/all
 
 # Include target in all.
@@ -173,39 +134,116 @@ clean: CMakeFiles/myplugins.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/serial_shared.dir
+# Target rules for target CMakeFiles/UDPSocket_shared.dir
 
 # All Build rule for target.
-CMakeFiles/serial_shared.dir/all:
-	$(MAKE) -f CMakeFiles/serial_shared.dir/build.make CMakeFiles/serial_shared.dir/depend
-	$(MAKE) -f CMakeFiles/serial_shared.dir/build.make CMakeFiles/serial_shared.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles --progress-num=5,6 "Built target serial_shared"
-.PHONY : CMakeFiles/serial_shared.dir/all
+CMakeFiles/UDPSocket_shared.dir/all:
+	$(MAKE) -f CMakeFiles/UDPSocket_shared.dir/build.make CMakeFiles/UDPSocket_shared.dir/depend
+	$(MAKE) -f CMakeFiles/UDPSocket_shared.dir/build.make CMakeFiles/UDPSocket_shared.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles --progress-num=3,4 "Built target UDPSocket_shared"
+.PHONY : CMakeFiles/UDPSocket_shared.dir/all
 
 # Include target in all.
-all: CMakeFiles/serial_shared.dir/all
+all: CMakeFiles/UDPSocket_shared.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/serial_shared.dir/rule: cmake_check_build_system
+CMakeFiles/UDPSocket_shared.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/serial_shared.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/UDPSocket_shared.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles 0
-.PHONY : CMakeFiles/serial_shared.dir/rule
+.PHONY : CMakeFiles/UDPSocket_shared.dir/rule
 
 # Convenience name for target.
-serial_shared: CMakeFiles/serial_shared.dir/rule
+UDPSocket_shared: CMakeFiles/UDPSocket_shared.dir/rule
 
-.PHONY : serial_shared
-
-# clean rule for target.
-CMakeFiles/serial_shared.dir/clean:
-	$(MAKE) -f CMakeFiles/serial_shared.dir/build.make CMakeFiles/serial_shared.dir/clean
-.PHONY : CMakeFiles/serial_shared.dir/clean
+.PHONY : UDPSocket_shared
 
 # clean rule for target.
-clean: CMakeFiles/serial_shared.dir/clean
+CMakeFiles/UDPSocket_shared.dir/clean:
+	$(MAKE) -f CMakeFiles/UDPSocket_shared.dir/build.make CMakeFiles/UDPSocket_shared.dir/clean
+.PHONY : CMakeFiles/UDPSocket_shared.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/UDPSocket_shared.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/yolov5.dir
+
+# All Build rule for target.
+CMakeFiles/yolov5.dir/all: CMakeFiles/serial_shared.dir/all
+CMakeFiles/yolov5.dir/all: CMakeFiles/myplugins.dir/all
+CMakeFiles/yolov5.dir/all: CMakeFiles/UDPSocket_shared.dir/all
+CMakeFiles/yolov5.dir/all: CMakeFiles/TCPSocket_shared.dir/all
+	$(MAKE) -f CMakeFiles/yolov5.dir/build.make CMakeFiles/yolov5.dir/depend
+	$(MAKE) -f CMakeFiles/yolov5.dir/build.make CMakeFiles/yolov5.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles --progress-num=9,10,11,12,13,14 "Built target yolov5"
+.PHONY : CMakeFiles/yolov5.dir/all
+
+# Include target in all.
+all: CMakeFiles/yolov5.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/yolov5.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles 14
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/yolov5.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles 0
+.PHONY : CMakeFiles/yolov5.dir/rule
+
+# Convenience name for target.
+yolov5: CMakeFiles/yolov5.dir/rule
+
+.PHONY : yolov5
+
+# clean rule for target.
+CMakeFiles/yolov5.dir/clean:
+	$(MAKE) -f CMakeFiles/yolov5.dir/build.make CMakeFiles/yolov5.dir/clean
+.PHONY : CMakeFiles/yolov5.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/yolov5.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/TCPSocket_shared.dir
+
+# All Build rule for target.
+CMakeFiles/TCPSocket_shared.dir/all:
+	$(MAKE) -f CMakeFiles/TCPSocket_shared.dir/build.make CMakeFiles/TCPSocket_shared.dir/depend
+	$(MAKE) -f CMakeFiles/TCPSocket_shared.dir/build.make CMakeFiles/TCPSocket_shared.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles --progress-num=1,2 "Built target TCPSocket_shared"
+.PHONY : CMakeFiles/TCPSocket_shared.dir/all
+
+# Include target in all.
+all: CMakeFiles/TCPSocket_shared.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/TCPSocket_shared.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/TCPSocket_shared.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles 0
+.PHONY : CMakeFiles/TCPSocket_shared.dir/rule
+
+# Convenience name for target.
+TCPSocket_shared: CMakeFiles/TCPSocket_shared.dir/rule
+
+.PHONY : TCPSocket_shared
+
+# clean rule for target.
+CMakeFiles/TCPSocket_shared.dir/clean:
+	$(MAKE) -f CMakeFiles/TCPSocket_shared.dir/build.make CMakeFiles/TCPSocket_shared.dir/clean
+.PHONY : CMakeFiles/TCPSocket_shared.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/TCPSocket_shared.dir/clean
 
 .PHONY : clean
 

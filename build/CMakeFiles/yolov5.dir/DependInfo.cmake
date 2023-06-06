@@ -32,6 +32,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 set(CMAKE_TARGET_LINKED_INFO_FILES
   "/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles/serial_shared.dir/DependInfo.cmake"
   "/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles/UDPSocket_shared.dir/DependInfo.cmake"
+  "/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles/TCPSocket_shared.dir/DependInfo.cmake"
   "/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles/myplugins.dir/DependInfo.cmake"
   )
 

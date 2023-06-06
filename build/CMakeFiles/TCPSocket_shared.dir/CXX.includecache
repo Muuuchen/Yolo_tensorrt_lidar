@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/robocon/Desktop/Yolo_tensorrt_lidar/TCPSocket.cpp
+TCPSocket.h
+/home/robocon/Desktop/Yolo_tensorrt_lidar/TCPSocket.h
+
+/home/robocon/Desktop/Yolo_tensorrt_lidar/TCPSocket.h
+iostream
+-
+string
+-
+stdio.h
+-
+sys/types.h
+-
+sys/socket.h
+-
+netinet/in.h
+-
+arpa/inet.h
+-
+stdlib.h
+-
+unistd.h
+-
+string.h
+-
+netdb.h
+-
+sys/uio.h
+-
+sys/time.h
+-
+sys/wait.h
+-
+fcntl.h
+-
+fstream
+-
+

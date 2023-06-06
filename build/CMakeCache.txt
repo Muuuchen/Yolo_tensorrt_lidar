@@ -326,6 +326,9 @@ CUDA_npps_LIBRARY:FILEPATH=/usr/local/cuda-10.2/lib64/libnpps.so
 OpenCV_DIR:PATH=/usr/local/lib/cmake/opencv4
 
 //Dependencies for target
+TCPSocket_shared_LIB_DEPENDS:STATIC=
+
+//Dependencies for target
 UDPSocket_shared_LIB_DEPENDS:STATIC=
 
 //Dependencies for the target

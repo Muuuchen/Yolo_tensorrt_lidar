@@ -111,30 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named yolov5
+# Target rules for targets named serial_shared
 
 # Build rule for target.
-yolov5: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 yolov5
-.PHONY : yolov5
+serial_shared: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 serial_shared
+.PHONY : serial_shared
 
 # fast build rule for target.
-yolov5/fast:
-	$(MAKE) -f CMakeFiles/yolov5.dir/build.make CMakeFiles/yolov5.dir/build
-.PHONY : yolov5/fast
-
-#=============================================================================
-# Target rules for targets named UDPSocket_shared
-
-# Build rule for target.
-UDPSocket_shared: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 UDPSocket_shared
-.PHONY : UDPSocket_shared
-
-# fast build rule for target.
-UDPSocket_shared/fast:
-	$(MAKE) -f CMakeFiles/UDPSocket_shared.dir/build.make CMakeFiles/UDPSocket_shared.dir/build
-.PHONY : UDPSocket_shared/fast
+serial_shared/fast:
+	$(MAKE) -f CMakeFiles/serial_shared.dir/build.make CMakeFiles/serial_shared.dir/build
+.PHONY : serial_shared/fast
 
 #=============================================================================
 # Target rules for targets named myplugins
@@ -150,17 +137,43 @@ myplugins/fast:
 .PHONY : myplugins/fast
 
 #=============================================================================
-# Target rules for targets named serial_shared
+# Target rules for targets named UDPSocket_shared
 
 # Build rule for target.
-serial_shared: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 serial_shared
-.PHONY : serial_shared
+UDPSocket_shared: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 UDPSocket_shared
+.PHONY : UDPSocket_shared
 
 # fast build rule for target.
-serial_shared/fast:
-	$(MAKE) -f CMakeFiles/serial_shared.dir/build.make CMakeFiles/serial_shared.dir/build
-.PHONY : serial_shared/fast
+UDPSocket_shared/fast:
+	$(MAKE) -f CMakeFiles/UDPSocket_shared.dir/build.make CMakeFiles/UDPSocket_shared.dir/build
+.PHONY : UDPSocket_shared/fast
+
+#=============================================================================
+# Target rules for targets named yolov5
+
+# Build rule for target.
+yolov5: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 yolov5
+.PHONY : yolov5
+
+# fast build rule for target.
+yolov5/fast:
+	$(MAKE) -f CMakeFiles/yolov5.dir/build.make CMakeFiles/yolov5.dir/build
+.PHONY : yolov5/fast
+
+#=============================================================================
+# Target rules for targets named TCPSocket_shared
+
+# Build rule for target.
+TCPSocket_shared: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 TCPSocket_shared
+.PHONY : TCPSocket_shared
+
+# fast build rule for target.
+TCPSocket_shared/fast:
+	$(MAKE) -f CMakeFiles/TCPSocket_shared.dir/build.make CMakeFiles/TCPSocket_shared.dir/build
+.PHONY : TCPSocket_shared/fast
 
 SerialInterface.o: SerialInterface.cpp.o
 
@@ -188,6 +201,33 @@ SerialInterface.s: SerialInterface.cpp.s
 SerialInterface.cpp.s:
 	$(MAKE) -f CMakeFiles/serial_shared.dir/build.make CMakeFiles/serial_shared.dir/SerialInterface.cpp.s
 .PHONY : SerialInterface.cpp.s
+
+TCPSocket.o: TCPSocket.cpp.o
+
+.PHONY : TCPSocket.o
+
+# target to build an object file
+TCPSocket.cpp.o:
+	$(MAKE) -f CMakeFiles/TCPSocket_shared.dir/build.make CMakeFiles/TCPSocket_shared.dir/TCPSocket.cpp.o
+.PHONY : TCPSocket.cpp.o
+
+TCPSocket.i: TCPSocket.cpp.i
+
+.PHONY : TCPSocket.i
+
+# target to preprocess a source file
+TCPSocket.cpp.i:
+	$(MAKE) -f CMakeFiles/TCPSocket_shared.dir/build.make CMakeFiles/TCPSocket_shared.dir/TCPSocket.cpp.i
+.PHONY : TCPSocket.cpp.i
+
+TCPSocket.s: TCPSocket.cpp.s
+
+.PHONY : TCPSocket.s
+
+# target to generate assembly for a file
+TCPSocket.cpp.s:
+	$(MAKE) -f CMakeFiles/TCPSocket_shared.dir/build.make CMakeFiles/TCPSocket_shared.dir/TCPSocket.cpp.s
+.PHONY : TCPSocket.cpp.s
 
 UDPSocket.o: UDPSocket.cpp.o
 
@@ -358,14 +398,18 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... yolov5"
-	@echo "... UDPSocket_shared"
+	@echo "... serial_shared"
 	@echo "... edit_cache"
 	@echo "... myplugins"
-	@echo "... serial_shared"
+	@echo "... UDPSocket_shared"
+	@echo "... yolov5"
+	@echo "... TCPSocket_shared"
 	@echo "... SerialInterface.o"
 	@echo "... SerialInterface.i"
 	@echo "... SerialInterface.s"
+	@echo "... TCPSocket.o"
+	@echo "... TCPSocket.i"
+	@echo "... TCPSocket.s"
 	@echo "... UDPSocket.o"
 	@echo "... UDPSocket.i"
 	@echo "... UDPSocket.s"

@@ -58,18 +58,18 @@ endif()
 
 # Set these up as variables to make reading the generated file easier
 set(CMAKE_COMMAND "/usr/bin/cmake") # path
-set(source_file "/home/robocon/Desktop/Yolo_tensorrt_lidar/yololayer.cu") # path
-set(NVCC_generated_dependency_file "/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles/myplugins.dir//myplugins_generated_yololayer.cu.o.NVCC-depend") # path
-set(cmake_dependency_file "/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles/myplugins.dir//myplugins_generated_yololayer.cu.o.depend") # path
+set(source_file "/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/yololayer.cu") # path
+set(NVCC_generated_dependency_file "/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/build/CMakeFiles/myplugins.dir//myplugins_generated_yololayer.cu.o.NVCC-depend") # path
+set(cmake_dependency_file "/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/build/CMakeFiles/myplugins.dir//myplugins_generated_yololayer.cu.o.depend") # path
 set(CUDA_make2cmake "/usr/share/cmake-3.10/Modules/FindCUDA/make2cmake.cmake") # path
 set(CUDA_parse_cubin "/usr/share/cmake-3.10/Modules/FindCUDA/parse_cubin.cmake") # path
 set(build_cubin OFF) # bool
 set(CUDA_HOST_COMPILER "/usr/bin/cc") # path
 # We won't actually use these variables for now, but we need to set this, in
 # order to force this file to be run again if it changes.
-set(generated_file_path "/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles/myplugins.dir//.") # path
-set(generated_file_internal "/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles/myplugins.dir//./myplugins_generated_yololayer.cu.o") # path
-set(generated_cubin_file_internal "/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles/myplugins.dir//./myplugins_generated_yololayer.cu.o.cubin.txt") # path
+set(generated_file_path "/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/build/CMakeFiles/myplugins.dir//.") # path
+set(generated_file_internal "/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/build/CMakeFiles/myplugins.dir//./myplugins_generated_yololayer.cu.o") # path
+set(generated_cubin_file_internal "/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/build/CMakeFiles/myplugins.dir//./myplugins_generated_yololayer.cu.o.cubin.txt") # path
 
 set(CUDA_NVCC_EXECUTABLE "/usr/local/cuda-10.2/bin/nvcc") # path
 set(CUDA_NVCC_FLAGS  ;; ) # list
@@ -79,7 +79,7 @@ set(CUDA_NVCC_FLAGS_MINSIZEREL  ; )
 set(CUDA_NVCC_FLAGS_RELEASE  ; )
 set(CUDA_NVCC_FLAGS_RELWITHDEBINFO  ; )
 set(nvcc_flags -m64;--std;c++11;-Dmyplugins_EXPORTS) # list
-set(CUDA_NVCC_INCLUDE_DIRS "/usr/local/cuda-10.2/include;/home/robocon/Desktop/Yolo_tensorrt_lidar/include;/usr/local/cuda/include;/usr/include/x86_64-linux-gnu;/usr/local/cuda-10.2/include;/usr/local/include/opencv4;/home/robocon/Desktop/Yolo_tensorrt_lidar/..") # list (needs to be in quotes to handle spaces properly).
+set(CUDA_NVCC_INCLUDE_DIRS "/usr/local/cuda-10.2/include;/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/include;/usr/local/cuda/include;/usr/include/x86_64-linux-gnu;/usr/local/cuda-10.2/include;/usr/local/include/opencv4;/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/..") # list (needs to be in quotes to handle spaces properly).
 set(CUDA_NVCC_COMPILE_DEFINITIONS [==[API_EXPORTS]==]) # list (needs to be in lua quotes see #16510 ).
 set(format_flag "-c") # string
 set(cuda_language_flag ) # list

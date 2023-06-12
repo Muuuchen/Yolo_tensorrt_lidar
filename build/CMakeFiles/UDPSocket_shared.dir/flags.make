@@ -6,5 +6,5 @@ CXX_FLAGS =  -pthread -std=c++11 -Wall -Ofast -Wfatal-errors -D_MWAITXINTRIN_H_I
 
 CXX_DEFINES = -DAPI_EXPORTS
 
-CXX_INCLUDES = -I/home/robocon/Desktop/Yolo_tensorrt_lidar/include -I/usr/local/cuda/include -I/usr/include/x86_64-linux-gnu -I/usr/local/cuda-10.2/include -I/usr/local/include/opencv4 -I/home/robocon/Desktop/Yolo_tensorrt_lidar/.. 
+CXX_INCLUDES = -I/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/include -I/usr/local/cuda/include -I/usr/include/x86_64-linux-gnu -I/usr/local/cuda-10.2/include -I/usr/local/include/opencv4 -I/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/.. 
 

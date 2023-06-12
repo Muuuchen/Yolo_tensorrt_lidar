@@ -58,6 +58,6 @@ std::string TCPSocket::tcpReceive()
     bytesRead = recv(newSocket, (char*)&rmsg, sizeof(rmsg), 0);
     std::string s = rmsg;
 
-    std::cout<<s<<std::endl;
+    std::cout<<rmsg<<std::endl;
     return s;
 }

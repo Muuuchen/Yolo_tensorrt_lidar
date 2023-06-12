@@ -7,7 +7,7 @@ static const int on_off_socket = 1;
 //socket send
 static const int port = 50000;
 static const float imageScaleFactor = 0.4;
-static const char ip[] ="192.168.3.247"; // Add here your alternative ip (e.g "192.168.1.6")
+static const char ip[] ="192.168.3.176"; // Add here your alternative ip (e.g "192.168.1.6")
 
 //serila control
 static const int on_off_serial= 1;

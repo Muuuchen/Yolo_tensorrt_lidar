@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/robocon/Desktop/Yolo_tensorrt_lidar/SerialInterface.cpp" "/home/robocon/Desktop/Yolo_tensorrt_lidar/build/CMakeFiles/serial_shared.dir/SerialInterface.cpp.o"
+  "/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/SerialInterface.cpp" "/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/build/CMakeFiles/serial_shared.dir/SerialInterface.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

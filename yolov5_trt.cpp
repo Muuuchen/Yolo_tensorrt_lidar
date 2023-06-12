@@ -19,7 +19,7 @@
 #include"config.h"
 #include"TCPSocket.h"
 #include"_track.h"
-
+#include<time.h>
 
 #define USE_FP16 // set USE_INT8 or USE_FP16 or USE_FP32
 #define NMS_THRESH 0.4
@@ -60,7 +60,7 @@ int out_flag = 0;
 int send_index = 0;
 int select_index=0;
 unsigned char buff_lidar[512];
-unsigned char buff_upper[1];
+unsigned char buff_upper[128];
 serialPort myserial_lidar;
 serialPort myserial_upper;
 int nread_upper,nwrite_upper;
@@ -70,6 +70,7 @@ pthread_mutex_t mutex_lidar;
 UDPSocket *s;
 TCPSocket *tcpSocket;
 int tcpAlive = 0;
+int aflag = 0;
 
 
 static int get_width(int x, float gw, int divisor = 8)
@@ -103,6 +104,69 @@ void* readLidar(void* args)
     }
 }
 //
+
+int dealstoi(const char* buffer, int left ,int right)
+{
+    int i = left;
+    int res = 0;
+    while(buffer[i]=='0' && i <= right) i++;
+    while(i<=right)
+    {
+        res*=10;
+        res += buffer[i]-'0';
+        i++;
+    }
+    return res;
+}
+
+void dealStrategy(std::string s)
+{
+    s = '@' + s;
+    const char *dealBuffer = +s.c_str(); 
+    //x坐标是 45678 y坐标 9 10 11 12 13
+    int mode = dealstoi(dealBuffer, 1,2);
+    int x = dealstoi(dealBuffer, 4,8);
+    int y = dealstoi(dealBuffer, 9,13);
+    int index = dealstoi(dealBuffer,14,15);
+    int parity = dealstoi(dealBuffer,16,17);
+    std::cout<<mode<<" " <<x<<" "<<y<<" "<<index<<" "<<parity<<std::endl;
+    if((mode + x+y+index)%31 == parity)
+    {
+        //success and send
+        myserial_upper.writeBuffer((unsigned char*)dealBuffer,18);
+        std::cout<<"OK_RECEIVE"<<std::endl;
+        std::string sget = "OK_GET";
+        tcpSocket->tcpSend(sget);
+        printf("OK_GET\n");
+        sleep(2);
+        std::string sgo = "OK_GO";
+        tcpSocket->tcpSend(sgo);
+        printf("OK_GO\n");
+        
+    } 
+    else
+    {
+        //jiaoyanshibai
+        tcpSocket->tcpSend(std::string("[Message]  Validition Error"));
+        printf("ERROR\n");
+    }
+
+
+}
+
+void* readSerialDipan(void* args)
+{
+
+    while(1)
+    {
+        //这里和底盘约定接受信息的格式
+        myserial_upper.readBuffer(buff_upper,18);
+        std::string str(reinterpret_cast<const char*>(buff_upper));
+        std::cout<<"接受底盘信息："<<str<<std::endl;
+        memset(buff_upper,0,sizeof(buff_upper));
+    }
+}
+
 void* readUpper(void* args)
 {
         while(1)
@@ -119,19 +183,32 @@ void* readUpper(void* args)
             // memset(buff_upper, 0, sizeof(buff_upper));  
             // pthread_mutex_unlock(&mutex_upper);
             std::string s = tcpSocket->tcpReceive();
-            if(s == "e")
+            if(s[0] == '@')
+            {
+                aflag = 1;
+                std::cout<<"readyToRead"<<std::endl;
+                continue;
+            }
+            if(aflag == 1)
+            {
+                aflag = 0;
+                dealStrategy("@"+s);
+            }
+            else if(s[0] == 'e')
             {
                 std::cerr<<"client exit unexception"<<std::endl;
                 tcpAlive = 0;
                 pthread_exit(NULL);
                 break;
             }
+
             int sint = std::stoi(s);
             select_index = sint;
             out_flag = 1;
             std::cout<<"read char: "<<s<<std::endl;
         }
 }
+
 double calAngle(rs2_intrinsics intrinsics , int x,int y)
 {
     double cx = intrinsics.ppx;
@@ -154,8 +231,8 @@ double calAngle(rs2_intrinsics intrinsics , int x,int y)
     double ryNew=(pnt.y-cy)/fy;
     if(out_flag)
     {
-        std::cout<< "x_pixel:"<<pnt.x<<std::endl;
-        std::cout<< "y_pixel:"<<pnt.y<<std::endl;
+        // std::cout<< "x_pixel:"<<pnt.x<<std::endl;
+        // std::cout<< "y_pixel:"<<pnt.y<<std::endl;
         out_flag = 0;
         float angle = atan(rxNew);
         
@@ -179,7 +256,7 @@ double calAngle(rs2_intrinsics intrinsics , int x,int y)
         }
         send_buff[12] = '!';
 	    send_buff[13] = 0;
-        std::cerr<<"发送的字符串为："<<(char*)send_buff<<std::endl;
+        std::cerr<<"发送的字符串为："<<send_buff<<std::endl;
         printf("\n");
         if(on_off_serial)
         {

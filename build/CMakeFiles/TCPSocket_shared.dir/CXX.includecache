@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/robocon/Desktop/Yolo_tensorrt_lidar/TCPSocket.cpp
+/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/TCPSocket.cpp
 TCPSocket.h
-/home/robocon/Desktop/Yolo_tensorrt_lidar/TCPSocket.h
+/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/TCPSocket.h
 
-/home/robocon/Desktop/Yolo_tensorrt_lidar/TCPSocket.h
+/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/TCPSocket.h
 iostream
 -
 string

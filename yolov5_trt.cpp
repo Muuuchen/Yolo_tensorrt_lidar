@@ -54,15 +54,20 @@ const char *INPUT_BLOB_NAME = "data";
 const char *OUTPUT_BLOB_NAME = "prob";
 #define DEVICE 0 // GPU id
 
+
 int select_point[2] = {320,240};
 int send_point[2] = {320,240};
 int out_flag = 0;
+int out_flag_angle = 0;
+int out_flag_dis = 0;
 int send_index = 0;
 int select_index=0;
 unsigned char buff_lidar[512];
 unsigned char buff_upper[128];
+unsigned char buff_chasis[128];
 serialPort myserial_lidar;
 serialPort myserial_upper;
+serialPort myserial_chasis;
 int nread_upper,nwrite_upper;
 int i,nread,nwrite;
 pthread_mutex_t mutex_upper;
@@ -121,8 +126,7 @@ int dealstoi(const char* buffer, int left ,int right)
 
 void dealStrategy(std::string s)
 {
-    s = '@' + s;
-    const char *dealBuffer = +s.c_str(); 
+    const char *dealBuffer = s.c_str(); 
     //x坐标是 45678 y坐标 9 10 11 12 13
     int mode = dealstoi(dealBuffer, 1,2);
     int x = dealstoi(dealBuffer, 4,8);
@@ -133,15 +137,34 @@ void dealStrategy(std::string s)
     if((mode + x+y+index)%31 == parity)
     {
         //success and send
-        myserial_upper.writeBuffer((unsigned char*)dealBuffer,18);
-        std::cout<<"OK_RECEIVE"<<std::endl;
-        std::string sget = "OK_GET";
-        tcpSocket->tcpSend(sget);
-        printf("OK_GET\n");
-        sleep(2);
-        std::string sgo = "OK_GO";
-        tcpSocket->tcpSend(sgo);
-        printf("OK_GO\n");
+        if(use_tcp)
+        {
+            //myserial_upper.writeBuffer((unsigned char*)dealBuffer,18);
+            std::cout<<"OK_RECEIVE"<<std::endl;
+            // 这里需要在step=0是返送 OK_GET_TEMP
+            std::string sget = "OK_GET";
+            if(mode == 0)
+                sget = "OK_GET_TEMP";
+                
+            tcpSocket->tcpSend(sget);
+            printf("OK_GET\n");
+            sleep(2);
+            std::string sgo = "OK_GO";
+            tcpSocket->tcpSend(sgo);
+            printf("OK_GO\n");
+        }
+        else
+        {
+            std::cerr<<"OK"<<std::endl;
+            std::string sget = "OK_GET";
+            const char* char_get = sget.c_str();
+            myserial_upper.writeBuffer( reinterpret_cast<unsigned char*>(const_cast<char*>(char_get)),6);
+            sleep(2);
+            std::string sgo = "OK_GO";
+            const char* char_go = sgo.c_str();
+            myserial_upper.writeBuffer( reinterpret_cast<unsigned char*>(const_cast<char*>(char_go)),5);
+
+        }
         
     } 
     else
@@ -153,20 +176,45 @@ void dealStrategy(std::string s)
 
 
 }
-
-void* readSerialDipan(void* args)
+//蓝牙模式
+void* readUpperBlueTooth(void* args)
 {
 
     while(1)
     {
         //这里和底盘约定接受信息的格式
         myserial_upper.readBuffer(buff_upper,18);
-        std::string str(reinterpret_cast<const char*>(buff_upper));
-        std::cout<<"接受底盘信息："<<str<<std::endl;
+        std::string s(reinterpret_cast<const char*>(buff_upper));
+        std::cout<<"接受底盘信息："<<s<<std::endl;
         memset(buff_upper,0,sizeof(buff_upper));
-    }
+        if(s[0] == '@')
+        {
+            dealStrategy(s);
+            continue;
+        }
+        else if(s[0] == 'e')
+        {
+            std::cerr<<"client exit unexception"<<std::endl;
+            tcpAlive = 0;
+            pthread_exit(NULL);
+            break;
+        }
+        if(s.length() == 1)
+        {
+            int sint = std::stoi(s);
+            select_index = sint;
+            out_flag = 1;
+            std::cout<<"read char: "<<s<<std::endl;
+        }
+        else
+        {
+            std::cout<<"格式错误"<<s<<std::endl;
+        }
+        }
 }
 
+
+//TCP模式
 void* readUpper(void* args)
 {
         while(1)
@@ -192,7 +240,15 @@ void* readUpper(void* args)
             if(aflag == 1)
             {
                 aflag = 0;
-                dealStrategy("@"+s);
+                // dealStrategy("@"+s);
+                unsigned char strc[20];
+                strc[0] = '@';
+                for(int i=0;i<17;i++)
+                    strc[i+1] = (unsigned char)(s[i]);
+                strc[18] = 0;
+                // std::string tmp_str = "@"+s;
+                // strcpy(strc, tmp_str.c_str());
+                myserial_chasis.writeBuffer(strc,18); //  ?
             }
             else if(s[0] == 'e')
             {
@@ -201,13 +257,41 @@ void* readUpper(void* args)
                 pthread_exit(NULL);
                 break;
             }
-
-            int sint = std::stoi(s);
-            select_index = sint;
-            out_flag = 1;
-            std::cout<<"read char: "<<s<<std::endl;
+            else{
+                int sint = std::stoi(s);
+                select_index = sint;
+                out_flag_angle = 1;
+                std::cout<<"read char: "<<s<<std::endl;
+            }
+            // out_flag_angle = 1;
         }
 }
+
+void* readChasis(void* args)
+{
+    int ARR_Cnt = 0;
+    int BRR_Cnt = 0;
+    while(1)
+    {
+        myserial_chasis.readBuffer(buff_chasis, 3);
+        if(buff_chasis[0]=='A'){
+            if(use_tcp)
+                tcpSocket ->tcpSend("ARR"), std::cout<<"ARR Send\n";
+            std::cout<<"Chasis Get ARR\n";
+        }
+        else if(buff_chasis[0]=='B'){
+            out_flag_dis = 1;
+            std::cout<<"Chasis Get BRR\n";
+        }else
+        {
+            tcpSocket->tcpSend("OK_GO"),std::cout<<"OK_GO\n";
+        }
+        memset(buff_chasis,0,sizeof(buff_chasis));
+        // std::cout<<"Chasis Read: "<<buff_chasis<<std::endl;
+    }
+}
+
+
 
 double calAngle(rs2_intrinsics intrinsics , int x,int y)
 {
@@ -229,41 +313,78 @@ double calAngle(rs2_intrinsics intrinsics , int x,int y)
     
     double rxNew=(pnt.x-cx)/fx;
     double ryNew=(pnt.y-cy)/fy;
-    if(out_flag)
-    {
-        // std::cout<< "x_pixel:"<<pnt.x<<std::endl;
-        // std::cout<< "y_pixel:"<<pnt.y<<std::endl;
-        out_flag = 0;
+
+    if(out_flag_angle){
+        out_flag_angle = 0;
         float angle = atan(rxNew);
-        
-        unsigned char send_buff[14];
-        send_buff[0] = '9';
-	    send_buff[1] = '$';
-        send_buff[2] = (unsigned char)buff_lidar[5];
-        send_buff[3] = (unsigned char)buff_lidar[7];
-        send_buff[4] = (unsigned char)buff_lidar[8];
-        send_buff[5] = (unsigned char)buff_lidar[9];
-        send_buff[6] = '#';
-        send_buff[7] =  (angle - 0.0 > 0.0) ? '+':'-';
-        if(angle < 0) angle = -angle;
-	    int k = 0;
-        while(k < 4)
-        {
-            send_buff[k+8] = (int)angle + '0';
-            angle -= (int)angle;
-            angle *= 10;
-            k++;
-        }
-        send_buff[12] = '!';
-	    send_buff[13] = 0;
+        unsigned char send_buff[7];
+        send_buff[0] = '$';
+        if(angle<0) send_buff[1]='-';
+        else send_buff[1]='+';
+        send_buff[2] = (int)(angle) + '0';
+        send_buff[3] = (int)(angle*10) + '0';
+        send_buff[4] = (int)(angle*100) + '0';
+        send_buff[5] = (int)(angle*1000) + '0';
+        send_buff[6] = 0;
         std::cerr<<"发送的字符串为："<<send_buff<<std::endl;
         printf("\n");
         if(on_off_serial)
         {
-            myserial_upper.writeBuffer(send_buff, 13);
-            memset(send_buff, 0, sizeof(send_buff));
+            myserial_chasis.writeBuffer(send_buff, 6);
         }
     }
+    if(out_flag_dis){
+        out_flag_dis = 0;
+        unsigned char send_buff[6];
+        send_buff[0] = '!';
+        send_buff[1] = (unsigned char)buff_lidar[5];
+        send_buff[2] = (unsigned char)buff_lidar[7];
+        send_buff[3] = (unsigned char)buff_lidar[8];
+        send_buff[4] = (unsigned char)buff_lidar[9];
+        send_buff[5] = 0;
+        std::cerr<<"发送的字符串为："<<send_buff<<std::endl;
+        printf("\n");
+        if(on_off_serial)
+        {
+            myserial_chasis.writeBuffer(send_buff, 5);
+        }
+    }
+
+    // if(out_flag)
+    // {
+    //     // std::cout<< "x_pixel:"<<pnt.x<<std::endl;
+    //     // std::cout<< "y_pixel:"<<pnt.y<<std::endl;
+    //     out_flag = 0;
+    //     float angle = atan(rxNew);
+        
+    //     unsigned char send_buff[14];
+    //     send_buff[0] = '9';
+	//     send_buff[1] = '$';
+    //     send_buff[2] = (unsigned char)buff_lidar[5];
+    //     send_buff[3] = (unsigned char)buff_lidar[7];
+    //     send_buff[4] = (unsigned char)buff_lidar[8];
+    //     send_buff[5] = (unsigned char)buff_lidar[9];
+    //     send_buff[6] = '#';
+    //     send_buff[7] =  (angle - 0.0 > 0.0) ? '+':'-';
+    //     if(angle < 0) angle = -angle;
+	//     int k = 0;
+    //     while(k < 4)
+    //     {
+    //         send_buff[k+8] = (int)angle + '0';
+    //         angle -= (int)angle;
+    //         angle *= 10;
+    //         k++;
+    //     }
+    //     send_buff[12] = '!';
+	//     send_buff[13] = 0;
+    //     std::cerr<<"发送的字符串为："<<send_buff<<std::endl;
+    //     printf("\n");
+    //     if(on_off_serial)
+    //     {
+    //         myserial_upper.writeBuffer(send_buff, 13);
+    //         memset(send_buff, 0, sizeof(send_buff));
+    //     }
+    // }
 }
         
 void doInference(IExecutionContext &context, cudaStream_t &stream, void **buffers, float *input, float *output, int batchSize)
@@ -275,8 +396,16 @@ void doInference(IExecutionContext &context, cudaStream_t &stream, void **buffer
     cudaStreamSynchronize(stream);
 }
 
+//640*480
+float dis(TrackingBox a){
+    int cx = a.box.x + a.box.width/2;
+    int cy = a.box.y + a.box.height/2;
+    return (cx-320)*(cx-320)+(cy-240)*(cy-240);
+}
+
 bool tracking_cmp(TrackingBox a, TrackingBox b){
-    return a.id<b.id;
+    return dis(a)<dis(b);
+    // return a.id<b.id;
 }
 
 
@@ -297,8 +426,10 @@ int main(int argc, char **argv)
         }
     }
 
-
-    tcpSocket = new TCPSocket(9876);
+    if(use_tcp&&only_self==0)
+    {
+        tcpSocket = new TCPSocket(9876);
+    }
     tcpAlive = 1;
 
 
@@ -306,7 +437,7 @@ int main(int argc, char **argv)
     ///
     cudaSetDevice(DEVICE);
 
-    std::string engine_name = "../weights/best.engine";
+    std::string engine_name = "../weights/yolo0628.engine";
     bool is_p6 = false;
     float gd = 0.0f, gw = 0.0f;
     std::ifstream file(engine_name, std::ios::binary);
@@ -364,10 +495,18 @@ int main(int argc, char **argv)
     cout<<"serialPort Test"<<endl;
     myserial_lidar.OpenPort(dev_lidar);
     myserial_lidar.setup(baudrate_lidar,0,8,1,'N'); 
-    myserial_upper.OpenPort(dev_upper);
-    myserial_upper.setup(baudrate_upper,0,8,1,'N'); 
+    // myserial_upper.OpenPort(dev_upper);
+    // myserial_upper.setup(baudrate_upper,0,8,1,'N'); 
     myserial_lidar.writeBuffer(test, 4);
-    myserial_upper.writeBuffer(hello_upper,5);
+    // myserial_upper.writeBuffer(hello_upper,5);
+
+    if(use_chasis){
+        myserial_chasis.OpenPort(dev_chasis);
+        myserial_chasis.setup(bundrate_chasis,0,8,1,'N');
+        myserial_chasis.writeBuffer(hello_upper, 5);
+        std::cout<<"Open Chasis\n";
+    }
+
     std::cout<<"ready to setup udp"<<std::endl;
     s = new UDPSocket(ip, port, TRUE, TRUE);
     printf("Socket successful!");
@@ -377,8 +516,19 @@ int main(int argc, char **argv)
     int ret = pthread_create(&thread_lidar_tid,NULL, readLidar,NULL);
     
     pthread_t thread_upper_tid;
-    int ret_u = pthread_create(&thread_upper_tid,NULL, readUpper,NULL);
-    
+    pthread_t thread_chasis_tid;
+
+    if(only_self==0){
+        std::cout<<"xxxxxxxxxxxxaa\n";
+        if(use_tcp)
+            int ret_u = pthread_create(&thread_upper_tid,NULL, readUpper,NULL);
+        // else
+        //     int ret_u = pthread_create(&thread_upper_tid,NULL, readUpperBlueTooth,NULL);
+        if(use_chasis){
+            std::cout<<"Create Chasis thread\n";
+            int ret_ = pthread_create(&thread_chasis_tid,NULL, readChasis,NULL);
+        }
+    }
 
     int key;
     int fcount = 0;
@@ -388,7 +538,7 @@ int main(int argc, char **argv)
     while (1)
     {
         //恢复工作
-        if(tcpAlive == 0)
+        if(tcpAlive == 0 && only_self==0)
         {       
             delete tcpSocket;
             tcpSocket = new TCPSocket(9876);
@@ -518,6 +668,9 @@ int main(int argc, char **argv)
             str = "22222222";
             s->send(reinterpret_cast<const unsigned char*>(str.c_str()), str.length());
             //printf("Sending image  to %s:%d with length %d bytes \n", ip, port, length);
+        }
+        else{
+            cv::imshow("img", img);
         }
         if(savedFlag)
         {

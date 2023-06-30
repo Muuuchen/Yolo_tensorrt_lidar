@@ -55,9 +55,10 @@ std::string TCPSocket::tcpReceive()
 {
     int bytesRead = 0;
     memset(&rmsg,0,sizeof(rmsg));
-    bytesRead = recv(newSocket, (char*)&rmsg, sizeof(rmsg), 0);
+    bytesRead += recv(newSocket, (char*)&rmsg, 18, 0);
     std::string s = rmsg;
+    // std::cout<<rmsg<<std::endl;
+    memset(&rmsg,0,sizeof(rmsg));
 
-    std::cout<<rmsg<<std::endl;
     return s;
 }

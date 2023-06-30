@@ -231,11 +231,23 @@ void* readUpper(void* args)
             // memset(buff_upper, 0, sizeof(buff_upper));  
             // pthread_mutex_unlock(&mutex_upper);
             std::string s = tcpSocket->tcpReceive();
-            if(s[0] == '@')
+            std::cout<< "current loop s is : "<<s<<std::endl;
+
+            if(s[0] == '@' && s.length() == 1)
             {
                 aflag = 1;
                 std::cout<<"readyToRead"<<std::endl;
                 continue;
+            }
+            if(s[0] == '@' && s.length() > 1)
+            {
+                unsigned char strc[20];
+                for(int i=0;i<18;i++)
+                    strc[i] = (unsigned char)(s[i]);
+                strc[19] = 0;
+                // std::string tmp_str = "@"+s;
+                // strcpy(strc, tmp_str.c_str());
+                myserial_chasis.writeBuffer(strc,18); //  ?
             }
             if(aflag == 1)
             {
@@ -257,7 +269,7 @@ void* readUpper(void* args)
                 pthread_exit(NULL);
                 break;
             }
-            else{
+            else if(s[0] <= '9' && s[0] >= '0'){
                 int sint = std::stoi(s);
                 select_index = sint;
                 out_flag_angle = 1;
@@ -265,7 +277,8 @@ void* readUpper(void* args)
             }
             // out_flag_angle = 1;
         }
-}
+    }
+
 
 void* readChasis(void* args)
 {
@@ -282,9 +295,9 @@ void* readChasis(void* args)
         else if(buff_chasis[0]=='B'){
             out_flag_dis = 1;
             std::cout<<"Chasis Get BRR\n";
-        }else
+        }else if(buff_chasis[0]=='O')
         {
-            tcpSocket->tcpSend("OK_GO"),std::cout<<"OK_GO\n";
+            tcpSocket->tcpSend("OK_GO");
         }
         memset(buff_chasis,0,sizeof(buff_chasis));
         // std::cout<<"Chasis Read: "<<buff_chasis<<std::endl;

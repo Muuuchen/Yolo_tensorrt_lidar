@@ -1,6 +1,10 @@
-#include<iostream>
+#include<iomanip>
 #include<cstring>
-
+#include <stdlib.h>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <ctime>
 
 int dealstoi(const char* buffer, int left ,int right)
 {
@@ -42,8 +46,15 @@ void dealStrategy(std::string s)
 
 int main()
 {
-    std::string s = "@00#10233012560019";
-    dealStrategy(s);
+    // std::string s = "@00#10233012560019";
+    // dealStrategy(s);
+    std::time_t t = std::time(nullptr);
+    std::tm tm = *std::localtime(&t);
+    std::stringstream ss;
+    ss << std::put_time(&tm, "%Y-%m-%d_%H-%M-%S");
+    std::string timestamp = ss.str();
+    std::string outputVideopath = "./record/" + timestamp + "saved.avi";
+    std::cout<<outputVideopath<<std::endl;
     return 0;
 
 }

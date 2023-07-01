@@ -6,31 +6,3 @@
 
 #IncludeRegexTransform: 
 
-/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/SerialInterface.cpp
-SerialInterface.h
-/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/SerialInterface.h
-string.h
--
-sys/ioctl.h
--
-
-/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/SerialInterface.h
-stdio.h
--
-stdlib.h
--
-unistd.h
--
-sys/types.h
--
-sys/stat.h
--
-fcntl.h
--
-termios.h
--
-errno.h
--
-stdint.h
--
-

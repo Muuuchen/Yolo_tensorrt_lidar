@@ -6,25 +6,3 @@
 
 #IncludeRegexTransform: 
 
-/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/UDPSocket.cpp
-UDPSocket.h
-/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/UDPSocket.h
-
-/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/UDPSocket.h
-sys/types.h
--
-sys/socket.h
--
-netinet/in.h
--
-arpa/inet.h
--
-unistd.h
--
-netdb.h
--
-string.h
--
-iostream
--
-

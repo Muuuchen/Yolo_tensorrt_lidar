@@ -35,8 +35,8 @@
 #define CV_EVENT_LBUTTONDBLCLK 7         //左键双击
 #define CV_EVENT_RBUTTONDBLCLK 8         //右键双击
 #define CV_EVENT_MBUTTONDBLCLK 9         //中键双击
-
 #define KEYDOWN(vk) (0x8000 & ::GetAsy)
+
 
 
 clock_t t_start, t_end;
@@ -76,6 +76,7 @@ UDPSocket *s;
 TCPSocket *tcpSocket;
 int tcpAlive = 0;
 int aflag = 0;
+int whileFlag = 1;
 
 
 static int get_width(int x, float gw, int divisor = 8)
@@ -97,15 +98,18 @@ static int get_depth(int x, float gd)
 
 void* readLidar(void* args)
 {
+
     while (1)
     {
 
         myserial_lidar.readBuffer(buff_lidar, 10);
-        // for (int i = 0; i < 10; i++)
-        // {
-        //     printf("%c", std::thread thread_lidar;buff[i]);
-        // }
-        // printf("\n");
+    //     std::cout<<"readLidar";
+    //     for (int i = 0; i < 10; i++)
+    //     {
+    //         printf("%c",buff_lidar[i]);
+    //     }
+    //     printf("\n");
+    // }
     }
 }
 //
@@ -266,6 +270,7 @@ void* readUpper(void* args)
             {
                 std::cerr<<"client exit unexception"<<std::endl;
                 tcpAlive = 0;
+                whileFlag = 0;
                 pthread_exit(NULL);
                 break;
             }
@@ -430,11 +435,19 @@ int main(int argc, char **argv)
     //input para define
     if(savedFlag)
     {
+        
+        std::time_t t = std::time(nullptr);
+        std::tm tm = *std::localtime(&t);
+        std::stringstream ss;
+        ss << std::put_time(&tm, "%Y-%m-%d_%H-%M-%S");
+        std::string timestamp = ss.str();
+        std::string outputVideopath = "/home/robocon/Desktop/Yolo-all-net/Yolo_tensorrt_lidar/record/saved.avi";
         int fps = 30;
-        outputVideo.open(outputVideopath, cv::VideoWriter::fourcc('X','V','I','D'),fps,cv::Size(640,480),true);   
+
+        outputVideo.open(outputVideopath, cv::VideoWriter::fourcc('M', 'J','P','G'),fps,cv::Size(640,480),true);   
         if(!outputVideo.isOpened())
         {
-            cout<< "failed to oppen!" <<endl;
+            cout<< "failed to open!" <<endl;
             return -1; 
         }
     }
@@ -510,7 +523,9 @@ int main(int argc, char **argv)
     myserial_lidar.setup(baudrate_lidar,0,8,1,'N'); 
     // myserial_upper.OpenPort(dev_upper);
     // myserial_upper.setup(baudrate_upper,0,8,1,'N'); 
-    myserial_lidar.writeBuffer(test, 4);
+    // myserial_lidar.writeBuffer(immediate, 5);
+    // myserial_lidar.writeBuffer(test, 4);
+
     // myserial_upper.writeBuffer(hello_upper,5);
 
     if(use_chasis){
@@ -527,6 +542,7 @@ int main(int argc, char **argv)
 
     pthread_t thread_lidar_tid;
     int ret = pthread_create(&thread_lidar_tid,NULL, readLidar,NULL);
+    std::cout<<"Create Lidar thread"<<std::endl;
     
     pthread_t thread_upper_tid;
     pthread_t thread_chasis_tid;
@@ -548,7 +564,7 @@ int main(int argc, char **argv)
 
     int tcnt = 0;
     Init_Tracker();
-    while (1)
+    while (whileFlag)
     {
         //恢复工作
         if(tcpAlive == 0 && only_self==0)
@@ -660,7 +676,10 @@ int main(int argc, char **argv)
         // cv::circle(img, cv::Point(send_point[0],send_point[1]), 3, cv::Scalar(255, 0, 0), -1);
         //cv::line(img,cv::Point(send_point[0], 1), cv::Point(send_point[0],639),cv::Scalar(255, 0, 0),1,8);
         float xnew = calAngle(color_intrin,send_point[0],send_point[1]);
-        
+        if(savedFlag)
+        {
+            outputVideo.write(img);
+        }
         //cv::imshow("src", img);
         if(on_off_socket)
         {
@@ -685,10 +704,7 @@ int main(int argc, char **argv)
         else{
             cv::imshow("img", img);
         }
-        if(savedFlag)
-        {
-            outputVideo<< img;
-        }
+
 
         // cv::imshow("img", img);
         key = cv::waitKey(1);
@@ -699,6 +715,9 @@ int main(int argc, char **argv)
         fcount = 0;
     }
     // Release stream and buffers
+    
+    outputVideo.release();
+    std::cout<<"end"<<std::endl;
     cudaStreamDestroy(stream);
 //     CUDA_CHECK(cu#include "./sort-cpp-master/sort-c++/Hungarian.h"
 // #include "./sort-cpp-master/sort-c++/KalmanTracker.h"daFree(buffers[inputIndex]));
